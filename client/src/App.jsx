@@ -11,11 +11,13 @@ import "react-toastify/dist/ReactToastify.css"
 import Property from "./pages/Property/Property";
 
 
+
 function App() {
   const queryClient = new QueryClient();
   
   return (
     <QueryClientProvider client={queryClient}>
+    
     <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
     <Routes>
@@ -31,6 +33,7 @@ function App() {
     </BrowserRouter>
     <ToastContainer/>
     <ReactQueryDevtools initialIsOpen={false}/>
+   
     </QueryClientProvider>
   );
 }
