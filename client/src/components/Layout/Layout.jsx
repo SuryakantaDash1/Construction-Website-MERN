@@ -8,7 +8,7 @@ import { useMutation } from 'react-query'
 import { createUser } from '../../utils/api'
 
 const Layout = () => {
-  const {isAuthenticated, user} = useAuth0()
+  const {isAuthenticated, user, getAccessTokenWithPopup} = useAuth0()
   const {setUserDetails} = useContext(UserDetailContext) 
 
   const {mutate} = useMutation({
@@ -17,7 +17,21 @@ const Layout = () => {
   })
 
   useEffect(()=> {
-    isAuthenticated && mutate()
+
+    const getTokenAndRegister = async ()=> {
+
+        const res = await getAccessTokenWithPopup({
+          authorizationParams: {
+            audience: "http://localhost:8000",
+            scope: "openid profile email"
+          }
+        });
+        localStorage.setItem("access-token", res)
+        setUserDetails((prev)=> ({...prev, token: res}))
+        console.log(res)
+    }
+
+    isAuthenticated && getTokenAndRegister()
   }, [isAuthenticated])
   return (
     <>
