@@ -6,6 +6,7 @@ import UserDetailContext from "../../context/UserDetailContext";
 import useProperties from "../../hooks/useProperties.jsx"
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
+import { createResidency } from "../../utils/api";
 
 // import { createResidency } from "../../utils/api";
 const Facilities = ({
